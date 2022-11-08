@@ -184,3 +184,4 @@ if resposta == questoes_sorteadas["correta"]:
     print("Você ACertou! Seu Prêmio atual é de R$ 1000,00")
 else:
      print("Que pena! Você errou e vai sair sem nada :(")
+     #so pra ver se manda
