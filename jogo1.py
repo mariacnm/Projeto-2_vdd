@@ -120,6 +120,37 @@ def sorteia_questao(dicionario_questao,nivel):
     sorteia= random.choice(list(lista))
     return sorteia
 
+def questao_para_texto(dicionario_questao,id):
+        return '----------------------------------------\nQUESTAO {}\n\n{}\n\nRESPOSTAS:\nA: {}\nB: {}\nC: {}\nD: {}'.format(id, dicionario_questao['titulo'], dicionario_questao['opcoes']['A'], dicionario_questao['opcoes']['B'], dicionario_questao['opcoes']['C'], dicionario_questao['opcoes']['D'])
 
+import random
 
+def gera_ajuda(questao):
+    lista2 = []
+    
+    for a,b in questao.items():
+
+        if questao['correta'] == 'A':
+            lista2.append(questao['opcoes']['B'])
+            lista2.append(questao['opcoes']['C'])
+            lista2.append(questao['opcoes']['D'])
+
+        if questao['correta'] == 'B':
+            lista2.append(questao['opcoes']['A'])
+            lista2.append(questao['opcoes']['C'])
+            lista2.append(questao['opcoes']['D'])
+
+        if questao['correta'] == 'C':
+            lista2.append(questao['opcoes']['A'])
+            lista2.append(questao['opcoes']['B'])
+            lista2.append(questao['opcoes']['D'])
+
+        if questao['correta'] == 'D':
+            lista2.append(questao['opcoes']['A'])
+            lista2.append(questao['opcoes']['B'])
+            lista2.append(questao['opcoes']['C'])
+
+    string = 'DICA:\nOpções certamente erradas: {0}'.format(random.choice(lista2))
+    return string
+    
 
