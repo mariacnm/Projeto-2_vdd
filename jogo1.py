@@ -156,3 +156,11 @@ def gera_ajuda(questao):
 print("Olá! você esta na Fortuna DesSfotf e terá a oportunidade de enriquecer!")
 nome=input("Qual seu nome")
 print("ok {0}, você tem direito a pular 3 vezes e 2 ajudas!\n".format(nome))
+
+#enter
+input("Aperte ENTER para continuar....\n")
+
+#o jogo vai começar
+print("O jogo já vai começar! Lá vem a primeira questão!\n")
+print("Vamos começar com a questões do nível FACIL!")
+input("Aperte ENTER para continuar....\n")
