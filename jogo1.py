@@ -1,3 +1,4 @@
+import random
 def transforma_base(questoes):
     dic2 = {}
     lista1 = []
@@ -113,5 +114,12 @@ def valida_questoes (lista_questoes):
     for i in lista_questoes:
         lista_saida.append(valida_questao(i))
     return lista_saida
+
+def sorteia_questao(dicionario_questao,nivel):
+    lista=dicionario_questao[nivel]
+    sorteia= random.choice(list(lista))
+    return sorteia
+
+
 
 
