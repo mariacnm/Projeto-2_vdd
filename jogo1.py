@@ -123,7 +123,6 @@ def sorteia_questao(dicionario_questao,nivel):
 def questao_para_texto(dicionario_questao,id):
         return '----------------------------------------\nQUESTAO {}\n\n{}\n\nRESPOSTAS:\nA: {}\nB: {}\nC: {}\nD: {}'.format(id, dicionario_questao['titulo'], dicionario_questao['opcoes']['A'], dicionario_questao['opcoes']['B'], dicionario_questao['opcoes']['C'], dicionario_questao['opcoes']['D'])
 
-import random
 
 def gera_ajuda(questao):
     lista2 = []
@@ -153,4 +152,7 @@ def gera_ajuda(questao):
     string = 'DICA:\nOpções certamente erradas: {0}'.format(random.choice(lista2))
     return string
     
-
+#começando o jogo perguntando o nome
+print("Olá! você esta na Fortuna DesSfotf e terá a oportunidade de enriquecer!")
+nome=input("Qual seu nome")
+print("ok {0}, você tem direito a pular 3 vezes e 2 ajudas!\n".format(nome))
