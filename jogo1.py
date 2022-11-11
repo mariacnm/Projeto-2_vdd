@@ -201,14 +201,17 @@ if trans_base["facil"]:
         resposta=input("Qual a sua resposta? ")
         if resposta == trans_base['facil'][k]['correta']:
           print("Você acertou! Seu prêmio atual é de R$ {:.2f}".format(lista_p[w]))
-        if sorteia in lista_sorteadas:
-          sorteia_inedita=sorteia_questao_inedita(trans_base,'facil',lista_sorteadas)
-          print(questao_para_texto(sorteia_inedita,k+1))
-        else:
-          sorteia = sorteia_questao(trans_base,'facil')
-          lista_sorteadas.append(sorteia)
-          print(questao_para_texto(sorteia,k+1))
-          resposta=input("Qual a sua resposta? ")
+          if sorteia in lista_sorteadas:
+            sorteia_inedita=sorteia_questao_inedita(trans_base,'facil',lista_sorteadas)
+            print(questao_para_texto(sorteia_inedita,k+1))
+          else:
+            sorteia = sorteia_questao(trans_base,'facil')
+            lista_sorteadas.append(sorteia)
+            print(questao_para_texto(sorteia,k+1))
+            resposta=input("Qual a sua resposta? ")
+      else:
+            print('Que pena! Você errou e vai sair sem nada :(')
+      break;
 
 
             #resposta=input("Qual a sua resposta? ")
