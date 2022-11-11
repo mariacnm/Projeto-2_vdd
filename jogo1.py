@@ -18,98 +18,50 @@ def transforma_base(questoes):
             dic2['dificil'] = lista3 
     return dic2
 
-def valida_questao(questao):
-
-    lista1 = ['A', 'B', 'C', 'D']
-    lista2 = ['facil', 'medio', 'dificil']
-    dic = {}
-    saida_opcoes = {}
-
-    if len(questao.keys()) != 4: 
-        dic['outro'] = 'numero_chaves_invalido' 
-
-    if 'titulo' not in questao.keys(): 
-        dic['titulo'] = 'nao_encontrado'
-    else:
-        if questao['titulo'].strip() == '':
-            dic['titulo'] = 'vazio' 
-
-    if 'nivel' not in questao.keys(): 
-        dic['nivel'] = 'nao_encontrado'
-    else:
-        if questao['nivel'] not in lista2: 
-            dic['nivel'] = 'valor_errado' 
-
-    if 'opcoes' not in questao.keys(): 
-        dic['opcoes'] = 'nao_encontrado'
-    else:
-        if len(questao['opcoes'].keys()) != 4: 
-            dic['opcoes'] = 'tamanho_invalido' 
-        else:
-            for a,b in questao['opcoes'].items():
-                if a in lista1:
-                    if b.strip() == '':
-                        saida_opcoes[a] = 'vazia'
-                        dic['opcoes'] = saida_opcoes
-                else:
-                    saida_opcoes[a] = 'chave_invalida_ou_nao_encontrada'
-                    dic['opcoes'] = saida_opcoes 
-
-    if 'correta' not in questao.keys():
-        dic['correta'] = 'nao_encontrado'
-    else: 
-        if questao['correta'] not in lista1:
-            dic['correta'] = 'valor_errado'
-
-    return dic
 def valida_questoes (lista_questoes):
-    def valida_questao (questao):
+    def valida_questao(questao):
 
-        saida = {}
+        lista1 = ['A', 'B', 'C', 'D']
+        lista2 = ['facil', 'medio', 'dificil']
+        dic = {}
         saida_opcoes = {}
-        lista_letras = ['A', 'B', 'C', 'D']
-        lista_niveis = ['facil', 'medio', 'dificil']
 
         if len(questao.keys()) != 4: 
-           saida['outro'] = 'numero_chaves_invalido' #2
+            dic['outro'] = 'numero_chaves_invalido' 
 
-        if 'titulo' not in questao.keys(): #1
-            saida['titulo'] = 'nao_encontrado'
+        if 'titulo' not in questao.keys(): 
+            dic['titulo'] = 'nao_encontrado'
         else:
-        
             if questao['titulo'].strip() == '':
-                saida['titulo'] = 'vazio' #3
+                dic['titulo'] = 'vazio' 
 
-        if 'nivel' not in questao.keys(): #1
-            saida['nivel'] = 'nao_encontrado'
+        if 'nivel' not in questao.keys(): 
+            dic['nivel'] = 'nao_encontrado'
         else:
-            if questao['nivel'] not in lista_niveis: 
-                saida['nivel'] = 'valor_errado' #4
+            if questao['nivel'] not in lista2: 
+                dic['nivel'] = 'valor_errado' 
 
-        if 'opcoes' not in questao.keys(): #1
-            saida['opcoes'] = 'nao_encontrado'
+        if 'opcoes' not in questao.keys(): 
+            dic['opcoes'] = 'nao_encontrado'
         else:
             if len(questao['opcoes'].keys()) != 4: 
-                saida['opcoes'] = 'tamanho_invalido' #5 
+                dic['opcoes'] = 'tamanho_invalido' 
             else:
-                for letra, valor in questao['opcoes'].items():
-                
-                    if letra in lista_letras:
-                        if valor.strip() == '':
-                            saida_opcoes[letra] = 'vazia' #7
-                            saida['opcoes'] = saida_opcoes
+                for a,b in questao['opcoes'].items():
+                    if a in lista1:
+                        if b.strip() == '':
+                            saida_opcoes[a] = 'vazia'
+                            dic['opcoes'] = saida_opcoes
                     else:
-                        saida_opcoes[letra] = 'chave_invalida_ou_nao_encontrada' #6
-                        saida['opcoes'] = saida_opcoes 
+                        saida_opcoes[a] = 'chave_invalida_ou_nao_encontrada'
+                        dic['opcoes'] = saida_opcoes 
 
-        if 'correta' not in questao.keys(): #1
-            saida['correta'] = 'nao_encontrado'
+        if 'correta' not in questao.keys():
+            dic['correta'] = 'nao_encontrado'
         else: 
-            if questao['correta'] not in lista_letras:
-                saida['correta'] = 'valor_errado' #8
-
-        return saida
-
+            if questao['correta'] not in lista1:
+                dic['correta'] = 'valor_errado'
+        return dic
     lista_saida = []
     for i in lista_questoes:
         lista_saida.append(valida_questao(i))
@@ -154,7 +106,7 @@ def gera_ajuda(questao):
     
 #começando o jogo perguntando o nome
 print("Olá! você esta na Fortuna DesSfotf e terá a oportunidade de enriquecer!")
-nome=input("Qual seu nome")
+nome=input("Qual seu nome? ")
 print("ok {0}, você tem direito a pular 3 vezes e 2 ajudas!\n".format(nome))
 
 #enter
@@ -164,3 +116,35 @@ input("Aperte ENTER para continuar....\n")
 print("O jogo já vai começar! Lá vem a primeira questão!\n")
 print("Vamos começar com a questões do nível FACIL!")
 input("Aperte ENTER para continuar....\n")
+questoes = [
+  {
+    'titulo': 'Qual o resultado da operação 57 + 32?',
+    'nivel': 'facil',
+    'opcoes': {'A': '-19', 'B': '85', 'C': '89', 'D': '99'},
+    'correta': 'C'
+  },
+  {
+    'titulo': 'Qual a capital do Brasil?',
+    'nivel': 'facil',
+    'opcoes': {'A': 'Brasília', 'B': 'Rio de janeiro', 'C': 'São Paulo', 'D': 'Osasco'},
+    'correta': 'A'
+  },
+  {
+    'titulo': 'Quem é considerada a primeira pessoa programadora do mundo?!',
+    'nivel': 'medio',
+    'opcoes': {'A': 'Marie Curie', 'B': 'Alan Turing', 'C': 'Ada Lovelace', 'D': 'Edsger Dijkstra'},
+    'correta': 'C'
+  }
+]
+'''trans_base = transforma_base(questoes)
+if trans_base['facil']:
+    for i in range(len(trans_base['facil'])):
+        valida1 = valida_questao(trans_base['facil'][i])
+        if valida1 == {}:
+            valida2 = valida_questoes()
+        else:
+            del trans_base['facil'][i]
+else:
+    if pont == 5000:'''
+
+    
