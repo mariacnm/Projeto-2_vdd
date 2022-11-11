@@ -26,7 +26,7 @@ def valida_questoes (lista_questoes):
         dic = {}
         saida_opcoes = {}
 
-        if len(questao.keys()) != 4: 
+        if len(questao) != 4: 
             dic['outro'] = 'numero_chaves_invalido' 
 
         if 'titulo' not in questao.keys(): 
@@ -136,15 +136,27 @@ questoes = [
     'correta': 'C'
   }
 ]
-'''trans_base = transforma_base(questoes)
-if trans_base['facil']:
+
+
+
+
+
+
+
+trans_base = transforma_base(questoes)
+if trans_base["facil"]:
     for i in range(len(trans_base['facil'])):
-        valida1 = valida_questao(trans_base['facil'][i])
-        if valida1 == {}:
-            valida2 = valida_questoes()
-        else:
-            del trans_base['facil'][i]
-else:
-    if pont == 5000:'''
+        valida1 = valida_questoes(trans_base['facil'][i])
+        print(valida1)
+        #if valida1 == []:
+            #sorteia=(sorteia_questao(trans_base,'facil'))
+            
+        #else: 
+            #del trans_base['facil'][i]
+        #else:
+            #del trans_base['facil'][i]
+#else:
+    #if pont == 5000:'''
 
     
+
