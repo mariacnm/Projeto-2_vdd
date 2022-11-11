@@ -28,9 +28,17 @@ def sorteia_questao(dicionario_questao,nivel):
 
 
 
-def sorteia_questao_inedida(dicionario_questao,nivel,lista_questao):
-    j=1
-    dicionario_questao[nivel]
+import random
+
+
+def sorteia_questao_inedita(dicionario_questao,nivel,lista_sorteadas):
+    for i in range(len(dicionario_questao)):
+        questao_inedita=random.choice(dicionario_questao[nivel])
+        if questao_inedita not in lista_sorteadas:
+            lista_sorteadas.append(questao_inedita)
+            return questao_inedita
+        else :
+            return questao_inedita
 
 
 
