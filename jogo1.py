@@ -12,7 +12,9 @@ input("Aperte ENTER para continuar....\n")
 print("O jogo já vai começar! Lá vem a primeira questão!\n")
 print("Vamos começar com a questões do nível FACIL!")
 input("Aperte ENTER para continuar....\n")
-questoes = [
+
+
+questoes=[
   {
     'titulo': 'Qual o resultado da operação 57 + 32?',
     'nivel': 'facil',
@@ -27,7 +29,7 @@ questoes = [
   },
   {
     'titulo': 'Quem é considerada a primeira pessoa programadora do mundo?!',
-    'nivel': 'facil',
+    'nivel': 'medio',
     'opcoes': {'A': 'Marie Curie', 'B': 'Alan Turing', 'C': 'Ada Lovelace', 'D': 'Edsger Dijkstra'},
     'correta': 'C'
   }
@@ -37,17 +39,15 @@ questoes = [
 from funcoes import valida_questoes
 from funcoes import sorteia_questao
 from funcoes import questao_para_texto
+
 trans_base = transforma_base(questoes)
 
-contador=1
+
 if trans_base["facil"]:
     for i in range(len(trans_base['facil'])):
         valida1= (valida_questoes(trans_base["facil"]))
-        if valida1 == [{}]:
-            sorteia=(sorteia_questao(trans_base,'facil'))
-            print(questao_para_texto(sorteia,contador))
-            resposta_usuario=input("Qual sua resposta?! ")
-        contador+=1
+        print(valida1)
+
         #else: 
             #del trans_base['facil'][i]
         #else:
