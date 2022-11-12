@@ -42,7 +42,6 @@ def sorteia_questao_inedita(dicionario_questao,nivel,lista_sorteadas):
 
 
 
-
 def questao_para_texto(dicionario_questao,id):
         return '----------------------------------------\nQUESTAO {}\n\n{}\n\nRESPOSTAS:\nA: {}\nB: {}\nC: {}\nD: {}'.format(id, dicionario_questao['titulo'], dicionario_questao['opcoes']['A'], dicionario_questao['opcoes']['B'], dicionario_questao['opcoes']['C'], dicionario_questao['opcoes']['D'])
 
