@@ -213,32 +213,81 @@ if trans_base["facil"]:
       else:
             print('Que pena! Você errou e vai sair sem nada :(')
       break;'''
-
+      
+trans_base = transforma_base(questoes)
+lista_p = [1000,5000,10000,30000,50000,100000,300000,500000,1000000]
 lista_sorteadas = []
+w = 0
+lista_sorteadas1 = []
+lista_sorteadas2 = []
+lista_sorteadas3 = []
 continuar = True
 pontuacao = 0
+
 while continuar:
   #if trans_base['facil']:
+
   for k in range(len(trans_base['facil'])):
-   #for i in range(len(trans_base['facil'])):
     valida1 =  valida_questoes(trans_base['facil'][k])
     if valida1 != {}:
       del valida1
+
+  for y in range(len(trans_base['medio'])):
+
+    valida2 =  valida_questoes(trans_base['medio'][y])
+    if valida2 != {}:
+      del valida2
+  for z in range(len(trans_base['dificil'])):
+
+    valida3 =  valida_questoes(trans_base['dificil'][z])
+    if valida3 != {}:
+      del valida3
+
   while w < len(lista_p):
-    sorteia_inedita = sorteia_questao_inedita(trans_base,'facil',lista_sorteadas)
-    lista_sorteadas.append(sorteia_inedita)
-    print(questao_para_texto(sorteia_inedita,k+1))
-    resposta=input("Qual a sua resposta? ")
-    if resposta != trans_base['facil'][k]['correta']:
-      print('Que pena! Você errou e vai sair sem nada :(')
-      continuar = False
-    if resposta == trans_base['facil'][k]['correta']:
-      if pontuacao == 30000:
-        x = 0
-        #medio
+
+    if pontuacao < 10000:
+      sorteia_inedita = sorteia_questao_inedita(trans_base,'facil',lista_sorteadas1)
+      lista_sorteadas1.append(sorteia_inedita)
+      print(questao_para_texto(sorteia_inedita,k+1))
+      resposta=input("Qual a sua resposta? ")
+    
+      if resposta != trans_base['facil'][k]['correta']:
+        print('Que pena! Você errou e vai sair sem nada :(')
+        continuar = False
       else:
         pontuacao = lista_p[w]
         print("Você acertou! Seu prêmio atual é de R$ {:.2f}".format(pontuacao))
+        w+=1
+
+    elif pontuacao == 10000:
+      #if pontuacao == 10000:
+      sorteia_inedita2 = sorteia_questao_inedita(trans_base,'medio',lista_sorteadas2)
+      lista_sorteadas2.append(sorteia_inedita)
+      print(questao_para_texto(sorteia_inedita,y+1))
+      resposta=input("Qual a sua resposta? ")
+
+      if resposta != trans_base['medio'][y]['correta']:
+        print('Que pena! Você errou e vai sair sem nada :(')
+        continuar = False
+
+      else:
+        if pontuacao == 100000:
+          sorteia_inedita3 = sorteia_questao_inedita(trans_base,'dificil',lista_sorteadas3)
+          lista_sorteadas3.append(sorteia_inedita)
+          print(questao_para_texto(sorteia_inedita,z+1))
+          resposta=input("Qual a sua resposta? ")
+          if resposta != trans_base['medio'][z]['correta']:
+            print('Que pena! Você errou e vai sair sem nada :(')
+            continuar = False
+          else:
+            if pontuacao == 1000000:
+              print("Voce ganhou!")
+              continuar = False
+        else:
+          pontuacao = lista_p[w]
+          print("Você acertou! Seu prêmio atual é de R$ {:.2f}".format(pontuacao))
+          w+=1
+  
 
 
 
