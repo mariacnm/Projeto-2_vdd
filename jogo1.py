@@ -7,6 +7,7 @@ from funcoes import questao_para_texto
 from funcoes import sorteia_questao_inedita
 from funcoes import gera_ajuda
 
+
 #começando o jogo perguntando o nome
 print("Olá! você esta na Fortuna DesSfotf e terá a oportunidade de enriquecer!")
 nome=input("Qual seu nome? ")
@@ -185,8 +186,8 @@ questoes=[{'titulo': 'Qual o resultado da operação 57 + 32?',
 
 trans_base = transforma_base(questoes)
 lista_p = [1000,5000,10000,30000,50000,100000,300000,500000,1000000]
-w = 0
-lista_sorteadas=[]
+lista_sorteadas = []
+'''w = 0
 if trans_base["facil"]:
     for i in range(len(trans_base['facil'])):
         valida1= (valida_questoes(trans_base["facil"]))
@@ -195,7 +196,7 @@ if trans_base["facil"]:
             del valida1[j]
     while w < len(lista_p):
       for k in range(len(trans_base['facil'])):
-        sorteia = sorteia_questao(trans_base,'facil')
+        sorteia = sorteia_questao_inedita(trans_base,'facil',lista_sorteadas)
         lista_sorteadas.append(sorteia)
         print(questao_para_texto(sorteia,k+1))
         resposta=input("Qual a sua resposta? ")
@@ -211,7 +212,42 @@ if trans_base["facil"]:
             resposta=input("Qual a sua resposta? ")
       else:
             print('Que pena! Você errou e vai sair sem nada :(')
-      break;
+      break;'''
+
+lista_sorteadas = []
+continuar = True
+pontuacao = 0
+while continuar:
+  #if trans_base['facil']:
+  for k in range(len(trans_base['facil'])):
+   #for i in range(len(trans_base['facil'])):
+    valida1 =  valida_questoes(trans_base['facil'][k])
+    if valida1 != {}:
+      del valida1
+  while w < len(lista_p):
+    sorteia_inedita = sorteia_questao_inedita(trans_base,'facil',lista_sorteadas)
+    lista_sorteadas.append(sorteia_inedita)
+    print(questao_para_texto(sorteia_inedita,k+1))
+    resposta=input("Qual a sua resposta? ")
+    if resposta != trans_base['facil'][k]['correta']:
+      print('Que pena! Você errou e vai sair sem nada :(')
+      continuar = False
+    if resposta == trans_base['facil'][k]['correta']:
+      if pontuacao == 30000:
+        x = 0
+        #medio
+      else:
+        pontuacao = lista_p[w]
+        print("Você acertou! Seu prêmio atual é de R$ {:.2f}".format(pontuacao))
+
+
+
+
+
+
+
+
+
 
 
             #resposta=input("Qual a sua resposta? ")
