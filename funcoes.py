@@ -67,10 +67,6 @@ def gera_ajuda(questao):
         else:
             return ""
     return resposta
-
-
-
-
 def valida_questoes (lista_questoes):
     def valida_questao (questao):
 
@@ -80,7 +76,7 @@ def valida_questoes (lista_questoes):
         lista_niveis = ['facil', 'medio', 'dificil']
 
         if len(questao.keys()) != 4: 
-           saida['outro'] = 'numero_chaves_invalido' #2
+            saida['outro'] = 'numero_chaves_invalido' #2
 
         if 'titulo' not in questao.keys(): #1
             saida['titulo'] = 'nao_encontrado'
@@ -102,7 +98,7 @@ def valida_questoes (lista_questoes):
                 saida['opcoes'] = 'tamanho_invalido' #5 
             else:
                 for letra, valor in questao['opcoes'].items():
-                
+                    
                     if letra in lista_letras:
                         if valor.strip() == '':
                             saida_opcoes[letra] = 'vazia' #7
@@ -116,11 +112,9 @@ def valida_questoes (lista_questoes):
         else: 
             if questao['correta'] not in lista_letras:
                 saida['correta'] = 'valor_errado' #8
-
         return saida
-
+        
     lista_saida = []
     for i in lista_questoes:
         lista_saida.append(valida_questao(i))
     return lista_saida
-
