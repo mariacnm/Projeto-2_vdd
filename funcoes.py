@@ -71,8 +71,7 @@ def gera_ajuda(questao):
 
 
 
-def valida_questoes (lista_questoes):
-    def valida_questao (questao):
+def valida_questao (questao):
 
         saida = {}
         saida_opcoes = {}
@@ -80,7 +79,7 @@ def valida_questoes (lista_questoes):
         lista_niveis = ['facil', 'medio', 'dificil']
 
         if len(questao.keys()) != 4: 
-           saida['outro'] = 'numero_chaves_invalido' #2
+            saida['outro'] = 'numero_chaves_invalido' #2
 
         if 'titulo' not in questao.keys(): #1
             saida['titulo'] = 'nao_encontrado'
@@ -102,7 +101,7 @@ def valida_questoes (lista_questoes):
                 saida['opcoes'] = 'tamanho_invalido' #5 
             else:
                 for letra, valor in questao['opcoes'].items():
-                
+                    
                     if letra in lista_letras:
                         if valor.strip() == '':
                             saida_opcoes[letra] = 'vazia' #7
@@ -116,61 +115,10 @@ def valida_questoes (lista_questoes):
         else: 
             if questao['correta'] not in lista_letras:
                 saida['correta'] = 'valor_errado' #8
-
         return saida
-
-    lista_saida = []
-    for i in lista_questoes:
-        lista_saida.append(valida_questao(i))
-    return lista_saida
-
-def valida_questao(questao):
-
-    lista1 = ['A', 'B', 'C', 'D']
-    lista2 = ['facil', 'medio', 'dificil']
-    dic = {}
-    saida_opcoes = {}
-
-    if len(questao.keys()) != 4: 
-        dic['outro'] = 'numero_chaves_invalido' 
-
-    if 'titulo' not in questao.keys(): 
-        dic['titulo'] = 'nao_encontrado'
-    else:
-        if questao['titulo'].strip() == '':
-            dic['titulo'] = 'vazio' 
-
-    if 'nivel' not in questao.keys(): 
-        dic['nivel'] = 'nao_encontrado'
-    else:
-        if questao['nivel'] not in lista2: 
-            dic['nivel'] = 'valor_errado' 
-
-    if 'opcoes' not in questao.keys(): 
-        dic['opcoes'] = 'nao_encontrado'
-    else:
-        if len(questao['opcoes'].keys()) != 4: 
-            dic['opcoes'] = 'tamanho_invalido' 
-        else:
-            for a,b in questao['opcoes'].items():
-                if a in lista1:
-                    if b.strip() == '':
-                        saida_opcoes[a] = 'vazia'
-                        dic['opcoes'] = saida_opcoes
-                else:
-                    saida_opcoes[a] = 'chave_invalida_ou_nao_encontrada'
-                    dic['opcoes'] = saida_opcoes 
-
-    if 'correta' not in questao.keys():
-        dic['correta'] = 'nao_encontrado'
-    else: 
-        if questao['correta'] not in lista1:
-            dic['correta'] = 'valor_errado'
-
-    return dic
-questao = {
-  'titulo': 'Qual o resultado da operação 57 + 32?',
-  'nivel': 'facil',
-  'opcoes': {'A': '-19', 'B': '85', 'C': '89', 'D': '99'},
-  'correta': 'C'
-}
+        
+def valida_questoes (lista_questoes):
+            lista_saida = []
+            for i in lista_questoes:
+                lista_saida.append(valida_questao(i))
+            return lista_saida
