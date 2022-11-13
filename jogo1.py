@@ -314,6 +314,6 @@ while continuar:
       continuar = False
       break
   
-    id +=1 
+    id +=1
     continuar 
     print("---------------------------------------------------------------------------")
