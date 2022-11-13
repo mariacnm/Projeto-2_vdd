@@ -168,11 +168,11 @@ questoes=[{'titulo': 'Qual o resultado da operação 57 + 32?',
           'opcoes': {'A': 'Uma banda de Rock', 'B': 'Uma marca de luxo', 'C': 'Cidade Francesa', 'D': 'Morte de tecido orgânico'},
           'correta': 'D'}
         ]
-        
+
 #começando o jogo perguntando o nome
 print("Olá! você esta na Fortuna DesSfotf e terá a oportunidade de enriquecer!")
 nome=input("Qual seu nome? ")
-print("ok {0}, você tem direito a pular 3 vezes e 2 ajudas!\n".format(nome))
+print("ok {0}, você tem direito a pular 3 vezes e 2 ajudas!\n".format(nome.upper()))
 
 #enter
 input("Aperte ENTER para continuar....\n")
@@ -197,15 +197,15 @@ while continuar:
   for i in range(len(lista_p)):
     if pontuacao == 0 or pontuacao == 1000 or pontuacao == 5000:
       sorteia_inedita = sorteia_questao_inedita(trans_base,'facil',lista_sorteadas)
-    if pontuacao == 10000:
+    if lista_p[i-1] == 10000:
       print("\nHEY! Você passou para o nível MÉDIO!")
     if pontuacao == 10000 or pontuacao == 30000 or pontuacao == 50000 or pontuacao == 100000:
       sorteia_inedita = sorteia_questao_inedita(trans_base,'medio',lista_sorteadas)
-    if pontuacao == 100000:
+    if lista_p[i-1] == 100000:
       print("\nHEY! Você passou para o nível DIFÍCIL!")
     if pontuacao == 100000 or pontuacao == 300000 or pontuacao == 500000:
-      sorteia_inedita = sorteia_questao_inedita(trans_base,'medio',lista_sorteadas)
-    if pontuacao == 1000000:
+      sorteia_inedita = sorteia_questao_inedita(trans_base,'dificil',lista_sorteadas)
+    if lista_p[i-1] == 1000000:
       print("vc venceu!")
 
     print(questao_para_texto(sorteia_inedita,id))
@@ -293,7 +293,7 @@ while continuar:
             if pontuacao == 100000:
               print("\nHEY! Você passou para o nível DIFÍCIL!")
             if pontuacao == 100000 or pontuacao == 300000 or pontuacao == 500000:
-              sorteia_inedita = sorteia_questao_inedita(trans_base,'medio',lista_sorteadas)
+              sorteia_inedita = sorteia_questao_inedita(trans_base,'dificil',lista_sorteadas)
             if pontuacao == 1000000:
               print("vc venceu!")
 
@@ -311,7 +311,8 @@ while continuar:
             if resposta != 'PULAR':
               break
     if resposta == sorteia_inedita['correta']:
-      print("Você acertou! Seu prêmio atual é de R${0}.00 :D".format(lista_p[i-1]))
+      pontuacao = lista_p[i]
+      print("Você acertou! Seu prêmio atual é de R${0}.00 :D".format(pontuacao))
       i += 1
     if resposta != sorteia_inedita['correta']: 
       print("Que pena! Você errou e vai sair sem nada :(")
