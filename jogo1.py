@@ -207,7 +207,11 @@ while continuar:
     if pontuacao == 100000 or pontuacao == 300000 or pontuacao == 500000:
       sorteia_inedita = sorteia_questao_inedita(trans_base,'dificil',lista_sorteadas)
     if pontuacao == 1000000:
+<<<<<<< HEAD
+      print("vc venceu!")
+=======
       print("PARABÉNS, você zerou o jogo e ganhou um milhão de reais!")
+>>>>>>> c3527640c4d1c8842e44c37804be10064189ab75
       continuar = False
       break
 
@@ -287,7 +291,11 @@ while continuar:
             if pontuacao == 100000 or pontuacao == 300000 or pontuacao == 500000:
               sorteia_inedita = sorteia_questao_inedita(trans_base,'dificil',lista_sorteadas)
             if pontuacao == 1000000:
+<<<<<<< HEAD
+              print("vc venceu!")
+=======
               print("PARABÉNS, você zerou o jogo e ganhou um milhão de reais!")
+>>>>>>> c3527640c4d1c8842e44c37804be10064189ab75
               continuar  = False
               break
 
