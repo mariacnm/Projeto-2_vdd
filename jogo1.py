@@ -170,6 +170,7 @@ questoes=[{'titulo': 'Qual o resultado da operação 57 + 32?',
         ]
 
 #começando o jogo perguntando o nome
+#começando o jogo perguntando o nome
 print("Olá! você esta na Fortuna DesSfotf e terá a oportunidade de enriquecer!")
 nome=input("Qual seu nome? ")
 print("ok {0}, você tem direito a pular 3 vezes e 2 ajudas!\n".format(nome.upper()))
@@ -206,7 +207,11 @@ while continuar:
     if pontuacao == 100000 or pontuacao == 300000 or pontuacao == 500000:
       sorteia_inedita = sorteia_questao_inedita(trans_base,'dificil',lista_sorteadas)
     if pontuacao == 1000000:
+<<<<<<< HEAD
       print("vc venceu!")
+=======
+      print("PARABÉNS, você zerou o jogo e ganhou um milhão de reais!")
+>>>>>>> c3527640c4d1c8842e44c37804be10064189ab75
       continuar = False
       break
 
@@ -286,7 +291,11 @@ while continuar:
             if pontuacao == 100000 or pontuacao == 300000 or pontuacao == 500000:
               sorteia_inedita = sorteia_questao_inedita(trans_base,'dificil',lista_sorteadas)
             if pontuacao == 1000000:
+<<<<<<< HEAD
               print("vc venceu!")
+=======
+              print("PARABÉNS, você zerou o jogo e ganhou um milhão de reais!")
+>>>>>>> c3527640c4d1c8842e44c37804be10064189ab75
               continuar  = False
               break
 
@@ -316,24 +325,3 @@ while continuar:
     id +=1 
     continuar 
     print("---------------------------------------------------------------------------")
-
-
-
-
-
-
-
-
-
-
-
-
-
-#resposta=input("Qual a sua resposta? ")
-#if resposta == trans_base['facil'][k]['correta']:
-  #print("Você acertou! Seu prêmio atual é de R$ {:.2f}".format(lista_p[w]))
-#if sorteia in lista_sorteadas:
-  
-  #sorteia_inedita=sorteia_questao_inedida(trans_base,'facil',lista_sorteadas)
-  #print(sorteia_questao_inedida)
-
