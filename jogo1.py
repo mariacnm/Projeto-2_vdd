@@ -188,7 +188,7 @@ lista_sorteadas = []
 continuar = True
 pontuacao = 0
 id = 1
-ajuda = 1 
+ajuda = 2 
 total1 = 2
 pulo = 1
 total2 = 3
@@ -210,14 +210,14 @@ while continuar:
 
     print(questao_para_texto(sorteia_inedita,id))
     resposta=input("Qual a sua resposta? ").upper()
-    while resposta not in sorteia_inedita['opcoes'] and resposta != 'AJUDA' and resposta != 'PARAR' and resposta != 'PULAR':
+    while resposta not in sorteia_inedita['opcoes'] and resposta != 'AJUDA' and resposta != 'PARAR' and resposta != 'PULA':
       print('Opcão inválida')
-      print("As opções de resposta são 'A', 'B', 'C', 'D', 'ajuda', 'pula e 'parar'!")
+      print("As opções de resposta são 'A', 'B', 'C', 'D', 'ajuda', 'pula' e 'parar'!")
       resposta = input("Qual sua resposta? ").upper()
 
     if resposta == 'AJUDA':
-      if total1 == 2:
-        total1 = 2 - ajuda
+      if ajuda > 1:
+        total1 = ajuda - 1
         print("\nOk,lá vem ajuda! Você ainda tem {} ajudas!".format(total1))
         input("Aperte ENTER para continuar...\n")
         print(gera_ajuda(sorteia_inedita))
@@ -227,89 +227,85 @@ while continuar:
         while resposta == "AJUDA":
           print('Não deu! Você já pediu ajuda nessa questão')
           input('Aperte ENTER para continuar...')
-          resposta = input("Qual sua resposta? ") 
-          resp = resposta.upper()
-          ajuda += 1
+          resposta = input("Qual sua resposta? ").upper()
 
-        if total1 == 1:
-          total1 -= ajuda
-          print("Ok,lá vem ajuda! ATENÇÃO: você não tem mais direito a ajudas!")
-          input("Aperte ENTER para continuar...\n")
-          print(gera_ajuda(sorteia_inedita))
-          input("Aperte ENTER para continuar...\n")
-          print(questao_para_texto(sorteia_inedita,id))
-          resposta = input("Qual sua resposta?").upper()
-          while resp == "AJUDA":
-              print("Não deu! Você já pediu ajuda nessa questão")
-              input("Aperte ENTER para continuar...")
-              resposta = input("Qual sua resposta?").upper()
-              ajuda += 1
-
-        if total1 == 0:
-          total1-=ajuda
-          print('Não deu! Você não tem mais direito a ajudas!')
-          enter = input("Aperte ENTER para continuar...\n")
-          print(questao_para_texto(sorteia_inedita,id))
-          resposta = input("Qual sua resposta?").upper()
-          while resposta == "AJUDA":
-            print('Não deu! Você já pediu ajuda nessa questão')
-            input('Aperte ENTER para continuar...')
-            resposta = input("Qual sua resposta? ") 
-            resp = resposta.upper()
+      if ajuda == 1:
+        print("Ok,lá vem ajuda! ATENÇÃO: você não tem mais direito a ajudas!")
+        input("Aperte ENTER para continuar...\n")
+        print(gera_ajuda(sorteia_inedita))
+        input("Aperte ENTER para continuar...\n")
+        print(questao_para_texto(sorteia_inedita,id))
+        resposta = input("Qual sua resposta?").upper()
+        while resposta == "AJUDA":
+            print("Não deu! Você já pediu ajuda nessa questão")
+            input("Aperte ENTER para continuar...")
+            resposta = input("Qual sua resposta?").upper()
             ajuda += 1
 
+      if total1 == 0:
+        total1-=ajuda
+        print('Não deu! Você não tem mais direito a ajudas!')
+        enter = input("Aperte ENTER para continuar...\n")
+        print(questao_para_texto(sorteia_inedita,id))
+        resposta = input("Qual sua resposta?").upper()
+        while resposta == "AJUDA":
+          print('Não deu! Você já pediu ajuda nessa questão')
+          input('Aperte ENTER para continuar...')
+          resposta = input("Qual sua resposta? ").upper()
+          ajuda += 1
+      ajuda-=ajuda
 
-    if resposta == "PARAR":
-        parar = input("Deseja mesmo para [S/N]?? Caso responda 'S', sairá com R${:.2f}!".format(lista_p[i- 1])).upper()
-        while parar != "S" and parar != "N":
-            print("Opção inválida")
-            parar = input("Deseja mesmo para [S/N]?? Caso responda 'S', sairá com R${0}.00!".format(lista_p[i-1]))
-        if parar == "S":
-            print("Ok! Você parou e seu prêmio é de R${0}.00".format(lista_p[i-1]))
-            break           
-        if parar == "N":
-            print(questao_para_texto(sorteia_inedita,id))
-            resposta = input("Qual sua resposta?").upper()
-
-    if resposta == 'PULAR':
-      if total2 == 3:
-        total2-=pulo
-        print("\nOk, pulando! Você ainda tem {} pulos!".format(total2))
-        input("Aperte ENTER para continuar...\n")
-
-
-    if resposta == 'PULAR':
-        while total2 > 0:
-            if total2 <= 3 and total2 != 1:
-              total2-=pulo
-              print("\nOk, pulando! Você ainda tem {} pulos!".format(total2))
-              enter = input("Aperte ENTER para continuar...\n")
-            if pontuacao == 0 or pontuacao == 1000 or pontuacao == 5000:
-              sorteia_inedita = sorteia_questao_inedita(trans_base,'facil',lista_sorteadas)
-            if pontuacao == 10000:
-              print("\nHEY! Você passou para o nível MÉDIO!")
-            if pontuacao == 10000 or pontuacao == 30000 or pontuacao == 50000 or pontuacao == 100000:
-              sorteia_inedita = sorteia_questao_inedita(trans_base,'medio',lista_sorteadas)
-            if pontuacao == 100000:
-              print("\nHEY! Você passou para o nível DIFÍCIL!")
-            if pontuacao == 100000 or pontuacao == 300000 or pontuacao == 500000:
-              sorteia_inedita = sorteia_questao_inedita(trans_base,'dificil',lista_sorteadas)
-            if pontuacao == 1000000:
-              print("vc venceu!")
-
-            print(questao_para_texto(sorteia_inedita,id))
-            resposta = input("Qual sua resposta?").upper()
-            pulo -= 1
-
-            if total2 == 1:
-              total2-=pulo
-              print("\nOk, pulando! ATENÇÃO: Você não tem mais direito a pulos!")
-              enter = input("Aperte ENTER para continuar...\n")
-            while resposta == 'PULAR' and total2 == 0:
-              print("\nVocê não tem mais direito a pulos!")
+      if resposta == "PARAR":
+          parar = input("Deseja mesmo para [S/N]?? Caso responda 'S', sairá com R${:.2f}!".format(lista_p[i- 1])).upper()
+          while parar != "S" and parar != "N":
+              print("Opção inválida")
+              parar = input("Deseja mesmo para [S/N]?? Caso responda 'S', sairá com R${0}.00!".format(lista_p[i-1]))
+          if parar == "S":
+              print("Ok! Você parou e seu prêmio é de R${0}.00".format(lista_p[i-1]))
+              break           
+          if parar == "N":
+              print(questao_para_texto(sorteia_inedita,id))
               resposta = input("Qual sua resposta?").upper()
-            if resposta != 'PULAR':
-              break
+
+      if resposta == 'PULA':
+        if total2 == 3:
+          total2-=pulo
+          print("\nOk, pulando! Você ainda tem {} pulos!".format(total2))
+          input("Aperte ENTER para continuar...\n")
+
+
+      if resposta == 'PULA':
+          while pulo > 0:
+              if pulo <= 3 and pulo != 1:
+                total2-=pulo
+                print("\nOk, pulando! Você ainda tem {} pulos!".format(total2))
+                input("Aperte ENTER para continuar...\n")
+              if pontuacao == 0 or pontuacao == 1000 or pontuacao == 5000:
+                sorteia_inedita = sorteia_questao_inedita(trans_base,'facil',lista_sorteadas)
+              if pontuacao == 10000:
+                print("\nHEY! Você passou para o nível MÉDIO!")
+              if pontuacao == 10000 or pontuacao == 30000 or pontuacao == 50000 or pontuacao == 100000:
+                sorteia_inedita = sorteia_questao_inedita(trans_base,'medio',lista_sorteadas)
+              if pontuacao == 100000:
+                print("\nHEY! Você passou para o nível DIFÍCIL!")
+              if pontuacao == 100000 or pontuacao == 300000 or pontuacao == 500000:
+                sorteia_inedita = sorteia_questao_inedita(trans_base,'dificil',lista_sorteadas)
+              if pontuacao == 1000000:
+                print("vc venceu!")
+
+              print(questao_para_texto(sorteia_inedita,id))
+              resposta = input("Qual sua resposta?").upper()
+              pulo += 1
+
+              if pulo == 1:
+                total2-=pulo
+                print("\nOk, pulando! ATENÇÃO: Você não tem mais direito a pulos!")
+                enter = input("Aperte ENTER para continuar...\n")
+              while resposta == 'PULA' and pulo == 0:
+                print("\nVocê não tem mais direito a pulos!")
+                resposta = input("Qual sua resposta?").upper()
+              if resposta != 'PULA':
+                break
     if resposta == sorteia_inedita['correta']:
       pontuacao = lista_p[i]
       print("Você acertou! Seu prêmio atual é de R${0}.00 :D".format(pontuacao))
