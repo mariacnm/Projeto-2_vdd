@@ -46,28 +46,33 @@ def questao_para_texto(dicionario_questao,id):
         return '----------------------------------------\nQUESTAO {}\n\n{}\n\nRESPOSTAS:\nA: {}\nB: {}\nC: {}\nD: {}'.format(id, dicionario_questao['titulo'], dicionario_questao['opcoes']['A'], dicionario_questao['opcoes']['B'], dicionario_questao['opcoes']['C'], dicionario_questao['opcoes']['D'])
 
 
-from random import randint
 def gera_ajuda(questao):
-    sorteia_numero=randint(1,2)
-    if sorteia_numero == 1:
-        sorteia=( ["A","B","C","D"][randint(0,3)])
+    lista2 = []
+    
+    for a,b in questao.items():
 
-        if sorteia != questao["correta"]:
-            ajuda=questao["opcoes"][sorteia]
-            resposta="'''DICA:\n""Opções certamente erradas: {0}'''".format(ajuda)
-        else:
-            return ""
-    else: 
-        sorteia=( ["A","B","C","D"][randint(0,3)])
+        if questao['correta'] == 'A':
+            lista2.append(questao['opcoes']['B'])
+            lista2.append(questao['opcoes']['C'])
+            lista2.append(questao['opcoes']['D'])
 
-        if sorteia != questao["correta"]:
-            ajuda=questao["opcoes"][sorteia]
-            ajuda2=questao["opcoes"][sorteia]
-            resposta="'DICA: ""Opções certamente erradas: {0} | {1}'".format(ajuda,ajuda2)
-        else:
-            return ""
-    return resposta
+        if questao['correta'] == 'B':
+            lista2.append(questao['opcoes']['A'])
+            lista2.append(questao['opcoes']['C'])
+            lista2.append(questao['opcoes']['D'])
 
+        if questao['correta'] == 'C':
+            lista2.append(questao['opcoes']['A'])
+            lista2.append(questao['opcoes']['B'])
+            lista2.append(questao['opcoes']['D'])
+
+        if questao['correta'] == 'D':
+            lista2.append(questao['opcoes']['A'])
+            lista2.append(questao['opcoes']['B'])
+            lista2.append(questao['opcoes']['C'])
+
+    string = 'DICA:\nOpções certamente erradas: {0}'.format(random.choice(lista2))
+    return string
 
 
 

@@ -8,20 +8,6 @@ from funcoes import sorteia_questao_inedita
 from funcoes import gera_ajuda
 
 
-#começando o jogo perguntando o nome
-print("Olá! você esta na Fortuna DesSfotf e terá a oportunidade de enriquecer!")
-nome=input("Qual seu nome? ")
-print("ok {0}, você tem direito a pular 3 vezes e 2 ajudas!\n".format(nome))
-
-#enter
-input("Aperte ENTER para continuar....\n")
-
-#o jogo vai começar
-print("O jogo já vai começar! Lá vem a primeira questão!\n")
-print("Vamos começar com a questões do nível FACIL!")
-input("Aperte ENTER para continuar....\n")
-
-
 questoes=[{'titulo': 'Qual o resultado da operação 57 + 32?',
           'nivel': 'facil',
           'opcoes': {'A': '-19', 'B': '85', 'C': '89', 'D': '99'},
@@ -183,37 +169,155 @@ questoes=[{'titulo': 'Qual o resultado da operação 57 + 32?',
           'correta': 'D'}
         ]
 
+#começando o jogo perguntando o nome
+print("Olá! você esta na Fortuna DesSfotf e terá a oportunidade de enriquecer!")
+nome=input("Qual seu nome? ")
+print("ok {0}, você tem direito a pular 3 vezes e 2 ajudas!\n".format(nome.upper()))
+
+#enter
+input("Aperte ENTER para continuar....\n")
+
+#o jogo vai começar
+print("O jogo já vai começar! Lá vem a primeira questão!\n")
+print("Vamos começar com a questões do nível FÁCIL!")
+input("Aperte ENTER para continuar....\n")
 
 trans_base = transforma_base(questoes)
 lista_p = [1000,5000,10000,30000,50000,100000,300000,500000,1000000]
 lista_sorteadas = []
-
-lista_sorteadas = []
 continuar = True
 pontuacao = 0
-w=0
+id = 1
+ajuda = 2 
+total1 = 2
+pulo = 1
+total2 = 3
 while continuar:
-  #if trans_base['facil']:
-  for k in range(len(trans_base['facil'])):
-   #for i in range(len(trans_base['facil'])):
-    valida1 =  valida_questoes(trans_base['facil'][k])
-    if valida1 != {}:
-      del valida1
-  while w < len(lista_p):
-    sorteia_inedita = sorteia_questao_inedita(trans_base,'facil',lista_sorteadas)
-    lista_sorteadas.append(sorteia_inedita)
-    print(questao_para_texto(sorteia_inedita,k+1))
-    resposta=input("Qual a sua resposta? ")
-    if resposta != trans_base['facil'][k]['correta']:
-      print('Que pena! Você errou e vai sair sem nada :(')
+  trans_base = transforma_base(questoes)
+  for i in range(len(lista_p)):
+    if pontuacao == 0 or pontuacao == 1000 or pontuacao == 5000:
+      sorteia_inedita = sorteia_questao_inedita(trans_base,'facil',lista_sorteadas)
+    if lista_p[i-1] == 10000:
+      print("\nHEY! Você passou para o nível MÉDIO!")
+    if pontuacao == 10000 or pontuacao == 30000 or pontuacao == 50000 or pontuacao == 100000:
+      sorteia_inedita = sorteia_questao_inedita(trans_base,'medio',lista_sorteadas)
+    if lista_p[i-1] == 100000:
+      print("\nHEY! Você passou para o nível DIFÍCIL!")
+    if pontuacao == 100000 or pontuacao == 300000 or pontuacao == 500000:
+      sorteia_inedita = sorteia_questao_inedita(trans_base,'dificil',lista_sorteadas)
+    if lista_p[i-1] == 1000000:
+      print("vc venceu!")
+
+    print(questao_para_texto(sorteia_inedita,id))
+    resposta=input("Qual a sua resposta? ").upper()
+    while resposta not in sorteia_inedita['opcoes'] and resposta != 'AJUDA' and resposta != 'PARAR' and resposta != 'PULA':
+      print('Opcão inválida')
+      print("As opções de resposta são 'A', 'B', 'C', 'D', 'ajuda', 'pula' e 'parar'!")
+      resposta = input("Qual sua resposta? ").upper()
+
+    if resposta == 'AJUDA':
+      if ajuda > 1:
+        total1 = ajuda - 1
+        print("\nOk,lá vem ajuda! Você ainda tem {} ajudas!".format(total1))
+        input("Aperte ENTER para continuar...\n")
+        print(gera_ajuda(sorteia_inedita))
+        input("Aperte ENTER para continuar...\n")
+        print(questao_para_texto(sorteia_inedita,id))
+        resposta = input("Qual sua resposta? ").upper()
+        while resposta == "AJUDA":
+          print('Não deu! Você já pediu ajuda nessa questão')
+          input('Aperte ENTER para continuar...')
+          resposta = input("Qual sua resposta? ").upper()
+
+      if ajuda == 1:
+        print("Ok,lá vem ajuda! ATENÇÃO: você não tem mais direito a ajudas!")
+        input("Aperte ENTER para continuar...\n")
+        print(gera_ajuda(sorteia_inedita))
+        input("Aperte ENTER para continuar...\n")
+        print(questao_para_texto(sorteia_inedita,id))
+        resposta = input("Qual sua resposta?").upper()
+        while resposta == "AJUDA":
+            print("Não deu! Você já pediu ajuda nessa questão")
+            input("Aperte ENTER para continuar...")
+            resposta = input("Qual sua resposta?").upper()
+            ajuda += 1
+
+      if total1 == 0:
+        total1-=ajuda
+        print('Não deu! Você não tem mais direito a ajudas!')
+        enter = input("Aperte ENTER para continuar...\n")
+        print(questao_para_texto(sorteia_inedita,id))
+        resposta = input("Qual sua resposta?").upper()
+        while resposta == "AJUDA":
+          print('Não deu! Você já pediu ajuda nessa questão')
+          input('Aperte ENTER para continuar...')
+          resposta = input("Qual sua resposta? ").upper()
+          ajuda += 1
+      ajuda-=ajuda
+
+      if resposta == "PARAR":
+          parar = input("Deseja mesmo para [S/N]?? Caso responda 'S', sairá com R${:.2f}!".format(lista_p[i- 1])).upper()
+          while parar != "S" and parar != "N":
+              print("Opção inválida")
+              parar = input("Deseja mesmo para [S/N]?? Caso responda 'S', sairá com R${0}.00!".format(lista_p[i-1]))
+          if parar == "S":
+              print("Ok! Você parou e seu prêmio é de R${0}.00".format(lista_p[i-1]))
+              break           
+          if parar == "N":
+              print(questao_para_texto(sorteia_inedita,id))
+              resposta = input("Qual sua resposta?").upper()
+
+      if resposta == 'PULA':
+        if total2 == 3:
+          total2-=pulo
+          print("\nOk, pulando! Você ainda tem {} pulos!".format(total2))
+          input("Aperte ENTER para continuar...\n")
+
+
+      if resposta == 'PULA':
+          while pulo > 0:
+              if pulo <= 3 and pulo != 1:
+                total2-=pulo
+                print("\nOk, pulando! Você ainda tem {} pulos!".format(total2))
+                input("Aperte ENTER para continuar...\n")
+              if pontuacao == 0 or pontuacao == 1000 or pontuacao == 5000:
+                sorteia_inedita = sorteia_questao_inedita(trans_base,'facil',lista_sorteadas)
+              if pontuacao == 10000:
+                print("\nHEY! Você passou para o nível MÉDIO!")
+              if pontuacao == 10000 or pontuacao == 30000 or pontuacao == 50000 or pontuacao == 100000:
+                sorteia_inedita = sorteia_questao_inedita(trans_base,'medio',lista_sorteadas)
+              if pontuacao == 100000:
+                print("\nHEY! Você passou para o nível DIFÍCIL!")
+              if pontuacao == 100000 or pontuacao == 300000 or pontuacao == 500000:
+                sorteia_inedita = sorteia_questao_inedita(trans_base,'dificil',lista_sorteadas)
+              if pontuacao == 1000000:
+                print("vc venceu!")
+
+              print(questao_para_texto(sorteia_inedita,id))
+              resposta = input("Qual sua resposta?").upper()
+              pulo += 1
+
+              if pulo == 1:
+                total2-=pulo
+                print("\nOk, pulando! ATENÇÃO: Você não tem mais direito a pulos!")
+                enter = input("Aperte ENTER para continuar...\n")
+              while resposta == 'PULA' and pulo == 0:
+                print("\nVocê não tem mais direito a pulos!")
+                resposta = input("Qual sua resposta?").upper()
+              if resposta != 'PULA':
+                break
+    if resposta == sorteia_inedita['correta']:
+      pontuacao = lista_p[i]
+      print("Você acertou! Seu prêmio atual é de R${0}.00 :D".format(pontuacao))
+      i += 1
+    if resposta != sorteia_inedita['correta']: 
+      print("Que pena! Você errou e vai sair sem nada :(")
       continuar = False
-    if resposta == trans_base['facil'][k]['correta']:
-      if pontuacao == 30000:
-        x = 0
-        #medio
-      else:
-        pontuacao = lista_p[w]
-        print("Você acertou! Seu prêmio atual é de R$ {:.2f}".format(pontuacao))
+      break
+  
+    id +=1 
+    continuar 
+    print("---------------------------------------------------------------------------")
 
 
 
@@ -225,11 +329,13 @@ while continuar:
 
 
 
-            #resposta=input("Qual a sua resposta? ")
-            #if resposta == trans_base['facil'][k]['correta']:
-              #print("Você acertou! Seu prêmio atual é de R$ {:.2f}".format(lista_p[w]))
-            #if sorteia in lista_sorteadas:
-              
-              #sorteia_inedita=sorteia_questao_inedida(trans_base,'facil',lista_sorteadas)
-              #print(sorteia_questao_inedida)
+
+
+#resposta=input("Qual a sua resposta? ")
+#if resposta == trans_base['facil'][k]['correta']:
+  #print("Você acertou! Seu prêmio atual é de R$ {:.2f}".format(lista_p[w]))
+#if sorteia in lista_sorteadas:
+  
+  #sorteia_inedita=sorteia_questao_inedida(trans_base,'facil',lista_sorteadas)
+  #print(sorteia_questao_inedida)
 
