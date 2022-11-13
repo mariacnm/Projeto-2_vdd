@@ -1,5 +1,4 @@
 
-
 def transforma_base(questoes):
     dic2 = {}
     lista1 = []
@@ -30,7 +29,6 @@ def sorteia_questao(dicionario_questao,nivel):
 
 import random
 
-
 def sorteia_questao_inedita(dicionario_questao,nivel,lista_sorteadas):
     for i in range(len(dicionario_questao)):
         questao_inedita=random.choice(dicionario_questao[nivel])
@@ -46,82 +44,75 @@ def questao_para_texto(dicionario_questao,id):
         return '----------------------------------------\nQUESTAO {}\n\n{}\n\nRESPOSTAS:\nA: {}\nB: {}\nC: {}\nD: {}'.format(id, dicionario_questao['titulo'], dicionario_questao['opcoes']['A'], dicionario_questao['opcoes']['B'], dicionario_questao['opcoes']['C'], dicionario_questao['opcoes']['D'])
 
 
+from random import randint
+
 def gera_ajuda(questao):
-    lista2 = []
-    
-    for a,b in questao.items():
+    sorteia_numero=randint(1,2)
+    if sorteia_numero == 1:
+        sorteia=( ["A","B","C","D"][randint(0,3)])
 
-        if questao['correta'] == 'A':
-            lista2.append(questao['opcoes']['B'])
-            lista2.append(questao['opcoes']['C'])
-            lista2.append(questao['opcoes']['D'])
-
-        if questao['correta'] == 'B':
-            lista2.append(questao['opcoes']['A'])
-            lista2.append(questao['opcoes']['C'])
-            lista2.append(questao['opcoes']['D'])
-
-        if questao['correta'] == 'C':
-            lista2.append(questao['opcoes']['A'])
-            lista2.append(questao['opcoes']['B'])
-            lista2.append(questao['opcoes']['D'])
-
-        if questao['correta'] == 'D':
-            lista2.append(questao['opcoes']['A'])
-            lista2.append(questao['opcoes']['B'])
-            lista2.append(questao['opcoes']['C'])
-
-    string = 'DICA:\nOpções certamente erradas: {0}'.format(random.choice(lista2))
-    return string
-
-
-
-def valida_questao (questao):
-
-        saida = {}
-        saida_opcoes = {}
-        lista_letras = ['A', 'B', 'C', 'D']
-        lista_niveis = ['facil', 'medio', 'dificil']
-
-        if len(questao.keys()) != 4: 
-            saida['outro'] = 'numero_chaves_invalido' #2
-
-        if 'titulo' not in questao.keys(): #1
-            saida['titulo'] = 'nao_encontrado'
+        if sorteia != questao["correta"]:
+            ajuda=questao["opcoes"][sorteia]
+            resposta="'''DICA:\n""Opções certamente erradas: {0}'''".format(ajuda)
         else:
-        
-            if questao['titulo'].strip() == '':
-                saida['titulo'] = 'vazio' #3
+            return ""
+    else: 
+        sorteia=( ["A","B","C","D"][randint(0,3)])
 
-        if 'nivel' not in questao.keys(): #1
-            saida['nivel'] = 'nao_encontrado'
+        if sorteia != questao["correta"]:
+            ajuda=questao["opcoes"][sorteia]
+            ajuda2=questao["opcoes"][sorteia]
+            resposta="'DICA: ""Opções certamente erradas: {0} | {1}'".format(ajuda,ajuda2)
         else:
-            if questao['nivel'] not in lista_niveis: 
-                saida['nivel'] = 'valor_errado' #4
+            return ""
+    return resposta
 
-        if 'opcoes' not in questao.keys(): #1
-            saida['opcoes'] = 'nao_encontrado'
+
+
+def valida_questao(questao):
+
+    lista1 = ['A', 'B', 'C', 'D']
+    lista2 = ['facil', 'medio', 'dificil']
+    dic = {}
+    saida_opcoes = {}
+
+    if len(questao) != 4: 
+        dic['outro'] = 'numero_chaves_invalido' 
+
+    if 'titulo' not in questao.keys(): 
+        dic['titulo'] = 'nao_encontrado'
+    else:
+        if questao['titulo'].strip() == '':
+            dic['titulo'] = 'vazio' 
+
+    if 'nivel' not in questao.keys(): 
+        dic['nivel'] = 'nao_encontrado'
+    else:
+        if questao['nivel'] not in lista2: 
+            dic['nivel'] = 'valor_errado' 
+
+    if 'opcoes' not in questao.keys(): 
+        dic['opcoes'] = 'nao_encontrado'
+    else:
+        if len(questao['opcoes'].keys()) != 4: 
+            dic['opcoes'] = 'tamanho_invalido' 
         else:
-            if len(questao['opcoes'].keys()) != 4: 
-                saida['opcoes'] = 'tamanho_invalido' #5 
-            else:
-                for letra, valor in questao['opcoes'].items():
-                    
-                    if letra in lista_letras:
-                        if valor.strip() == '':
-                            saida_opcoes[letra] = 'vazia' #7
-                            saida['opcoes'] = saida_opcoes
-                    else:
-                        saida_opcoes[letra] = 'chave_invalida_ou_nao_encontrada' #6
-                        saida['opcoes'] = saida_opcoes 
+            for a,b in questao['opcoes'].items():
+                if a in lista1:
+                    if b.strip() == '':
+                        saida_opcoes[a] = 'vazia'
+                        dic['opcoes'] = saida_opcoes
+                else:
+                    saida_opcoes[a] = 'chave_invalida_ou_nao_encontrada'
+                    dic['opcoes'] = saida_opcoes 
 
-        if 'correta' not in questao.keys(): #1
-            saida['correta'] = 'nao_encontrado'
-        else: 
-            if questao['correta'] not in lista_letras:
-                saida['correta'] = 'valor_errado' #8
-        return saida
-        
+    if 'correta' not in questao.keys():
+        dic['correta'] = 'nao_encontrado'
+    else: 
+        if questao['correta'] not in lista1:
+            dic['correta'] = 'valor_errado'
+    return dic 
+
 def valida_questoes (lista_questoes):
             lista_saida = []
             for i in lista_questoes:
